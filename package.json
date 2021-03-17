@@ -1,0 +1,58 @@
+{
+  "name": "vite-plugin-tailwind",
+  "version": "0.0.1",
+  "description": "vite tailwind plugin with jit compiler enabled",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "tailwind.css"
+  ],
+  "scripts": {
+    "build-dist": "tsc",
+    "build": "run-s prebuild build-dist ",
+    "dev": "tsc -w --incremental",
+    "lint": "eslint src --ext .ts",
+    "prebuild": "rimraf dist && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/axe-me/vite-plugin-tailwind.git"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "tailwind",
+    "tailwind-jit"
+  ],
+  "author": "Axe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/axe-me/vite-plugin-tailwind/issues"
+  },
+  "homepage": "https://github.com/axe-me/vite-plugin-tailwind#readme",
+  "devDependencies": {
+    "@tailwindcss/jit": "^0.1.1",
+    "@types/debug": "^4.1.5",
+    "@types/estree": "^0.0.46",
+    "@types/node": "^14.14.35",
+    "@types/tailwindcss": "^2.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "eslint": "^7.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-nesting": "^7.0.1",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^4.1.0",
+    "autoprefixer": "^10.2.5",
+    "chalk": "^4.1.0",
+    "debug": "^4.3.1",
+    "postcss": "^8.2.8",
+    "tailwindcss": "^2.0.3",
+    "vite": "^2.1.1"
+  }
+}
