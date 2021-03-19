@@ -1,8 +1,10 @@
+import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
-import { VitePluginTailwind } from "vite-plugin-tailwind";
+import tailwind from "vite-plugin-tailwind";
 
 export default defineConfig({
   plugins: [
-    VitePluginTailwind(),
+    vue(),
+    tailwind(),
   ],
 });

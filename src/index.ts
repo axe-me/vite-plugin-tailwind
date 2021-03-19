@@ -1,6 +1,6 @@
 import { TailwindConfig } from "tailwindcss/tailwind-config";
 
-export { VitePluginTailwind } from './vite-plugin-tailwind';
+export { VitePluginTailwind as default } from './vite-plugin-tailwind';
 
 export interface PreviewOption {
   path?: string;

@@ -7,7 +7,7 @@ import { VitePluginTailwindOptions } from '.';
 export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plugin {
   const config: VitePluginTailwindOptions = {
     jit: true,
-    autoprefixer: true,
+    autoprefixer: false,
     nesting: true,
     cssPath: "vite-plugin-tailwind/tailwind.css",
     virtualFileId: "@tailwind",
@@ -17,13 +17,14 @@ export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plu
     },
     tailwind: {
       // @ts-ignore looks like a bug in type def
-      purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}']
+      purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx,svelte}']
     },
     ...options
   };
 
   return {
     name: 'vite-plugin-tailwind',
+    enforce: 'pre',
     config: () => {
       const plugins: Postcss.Plugin[]  = [];
 
@@ -35,7 +36,7 @@ export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plu
         plugins.push(require('postcss-nesting'))
       }
       
-      if (config.jit) {
+      if (config.autoprefixer) {
         plugins.push(require('autoprefixer'))
       }
 
@@ -49,12 +50,7 @@ export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plu
     },
     resolveId(id) {
       if (id === config.virtualFileId) {
-        return config.virtualFileId
-      }
-    },
-    load(id) {
-      if (id === config.virtualFileId) {
-        return `import '${config.cssPath}'`
+        return config.cssPath
       }
     }
   };
