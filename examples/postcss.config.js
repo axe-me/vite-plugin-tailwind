@@ -1,5 +1,9 @@
 module.exports = {
   plugins: {
-    '@tailwindcss/jit': {},
+    '@tailwindcss/jit': {
+      purge: [
+        './src/*.vue',
+      ],
+    },
   }
 }

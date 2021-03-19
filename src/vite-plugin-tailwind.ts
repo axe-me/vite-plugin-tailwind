@@ -1,5 +1,4 @@
-// @ts-ignore
-import * as tailwindcssJit from "@tailwindcss/jit";
+import path from 'path';
 import * as Postcss from 'postcss';
 import { Plugin } from 'vite';
 import { VitePluginTailwindOptions } from '.';
@@ -8,9 +7,9 @@ export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plu
   const config: VitePluginTailwindOptions = {
     jit: true,
     autoprefixer: false,
-    nesting: true,
-    cssPath: "vite-plugin-tailwind/tailwind.css",
-    virtualFileId: "@tailwind",
+    nesting: false,
+    cssPath: path.resolve("../tailwind.css"),
+    virtualFileId: "@tailwindcss",
     preview: {
       path: '/__tailwind',
       open: false
@@ -24,13 +23,16 @@ export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plu
 
   return {
     name: 'vite-plugin-tailwind',
-    enforce: 'pre',
-    config: () => {
+    config: (_, env) => {
       const plugins: Postcss.Plugin[]  = [];
 
-      if (config.jit) {
-        plugins.push(tailwindcssJit.default(config.tailwind))
-      }
+      // need this for jit plugin to enable watch mode
+      process.env.NODE_ENV = env.mode
+
+      const tailwind = config.jit ? require('@tailwindcss/jit') : require('tailwindcss')
+      const tailwindPlugin = tailwind(config.tailwind)
+
+      plugins.push(tailwindPlugin)
 
       if (config.nesting) {
         plugins.push(require('postcss-nesting'))
@@ -43,7 +45,7 @@ export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plu
       return {
         css: {
           postcss: {
-            plugins,
+            plugins
           }
         }
       }

@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "vite tailwind plugin with jit compiler enabled",
   "main": "dist/index.js",
+  "workspaces": [
+    "."
+  ],
   "files": [
     "dist",
     "tailwind.css"
@@ -40,7 +43,6 @@
     "eslint": "^7.22.0",
     "eslint-plugin-node": "^11.1.0",
     "npm-run-all": "^4.1.5",
-    "postcss-nesting": "^7.0.1",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.2.3"
@@ -52,7 +54,8 @@
     "chalk": "^4.1.0",
     "debug": "^4.3.1",
     "postcss": "^8.2.8",
-    "tailwindcss": "^2.0.3",
+    "postcss-nesting": "^7.0.1",
+    "tailwindcss": "^2.0.4",
     "vite": "^2.1.1"
   }
 }
