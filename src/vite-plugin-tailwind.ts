@@ -2,16 +2,17 @@ import path from 'path';
 import * as Postcss from 'postcss';
 import { Plugin } from 'vite';
 import { VitePluginTailwindOptions } from '.';
+import { VitePluginTailwindViewer } from './vite-plugin-tailwind-viewer';
 
-export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plugin {
+export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plugin[] {
   const config: VitePluginTailwindOptions = {
     jit: true,
     autoprefixer: false,
     nesting: false,
-    cssPath: path.resolve("../tailwind.css"),
+    cssPath: path.resolve("./tailwind.css"),
     virtualFileId: "@tailwindcss",
-    preview: {
-      path: '/__tailwind',
+    viewer: {
+      path: '/_tailwind/',
       open: false
     },
     tailwind: {
@@ -21,39 +22,45 @@ export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plu
     ...options
   };
 
-  return {
-    name: 'vite-plugin-tailwind',
-    config: (_, env) => {
-      const plugins: Postcss.Plugin[]  = [];
+  return [
+    {
+      name: 'vite-plugin-tailwind',
+      config: (_, env) => {
+        const plugins: Postcss.Plugin[]  = [];
 
-      // need this for jit plugin to enable watch mode
-      process.env.NODE_ENV = env.mode
+        // need this for jit plugin to enable watch mode
+        process.env.NODE_ENV = env.mode
 
-      const tailwind = config.jit ? require('@tailwindcss/jit') : require('tailwindcss')
-      const tailwindPlugin = tailwind(config.tailwind)
+        const tailwind = config.jit ? require('@tailwindcss/jit') : require('tailwindcss')
+        const tailwindPlugin = tailwind(config.tailwind)
 
-      plugins.push(tailwindPlugin)
+        plugins.push(tailwindPlugin)
 
-      if (config.nesting) {
-        plugins.push(require('postcss-nesting'))
-      }
-      
-      if (config.autoprefixer) {
-        plugins.push(require('autoprefixer'))
-      }
+        if (config.nesting) {
+          plugins.push(require('postcss-nesting'))
+        }
+        
+        if (config.autoprefixer) {
+          plugins.push(require('autoprefixer'))
+        }
 
-      return {
-        css: {
-          postcss: {
-            plugins
+        return {
+          css: {
+            postcss: {
+              plugins
+            }
           }
+        }
+      },
+      resolveId(id) {
+        if (id === config.virtualFileId) {
+          return config.cssPath
         }
       }
     },
-    resolveId(id) {
-      if (id === config.virtualFileId) {
-        return config.cssPath
-      }
-    }
-  };
+    VitePluginTailwindViewer({
+      ...config.viewer,
+      tailwind: config.tailwind
+    })
+  ];
 }

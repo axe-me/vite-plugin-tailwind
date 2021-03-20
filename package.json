@@ -55,6 +55,7 @@
     "debug": "^4.3.1",
     "postcss": "^8.2.8",
     "postcss-nesting": "^7.0.1",
+    "tailwind-config-viewer": "^1.5.1",
     "tailwindcss": "^2.0.4",
     "vite": "^2.1.1"
   }

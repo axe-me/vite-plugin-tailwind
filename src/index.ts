@@ -2,9 +2,10 @@ import { TailwindConfig } from "tailwindcss/tailwind-config";
 
 export { VitePluginTailwind as default } from './vite-plugin-tailwind';
 
-export interface PreviewOption {
+export interface ViewerOption {
   path?: string;
-  open?: boolean; 
+  open?: boolean;
+  tailwind?: Partial<TailwindConfig>;
 }
 
 export interface VitePluginTailwindOptions {
@@ -13,6 +14,6 @@ export interface VitePluginTailwindOptions {
   nesting?: boolean;
   cssPath?: string;
   virtualFileId?: string;
-  preview?: PreviewOption;
-  tailwind?: TailwindConfig
+  viewer?: ViewerOption;
+  tailwind?: Partial<TailwindConfig>;
 }
