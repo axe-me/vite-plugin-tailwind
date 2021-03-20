@@ -1,11 +1,9 @@
-import { TailwindConfig } from "tailwindcss/tailwind-config";
-
 export { VitePluginTailwind as default } from './vite-plugin-tailwind';
 
 export interface ViewerOption {
   path?: string;
   open?: boolean;
-  tailwind?: Partial<TailwindConfig>;
+  tailwind?: any; // no correct tailwind config type found anywhere
 }
 
 export interface VitePluginTailwindOptions {
@@ -15,5 +13,5 @@ export interface VitePluginTailwindOptions {
   cssPath?: string;
   virtualFileId?: string;
   viewer?: ViewerOption;
-  tailwind?: Partial<TailwindConfig>;
+  tailwind?: any;
 }
