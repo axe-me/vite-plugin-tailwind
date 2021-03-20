@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vite --force --debug",
+    "dev": "vite --force",
     "debug": "vite"
   },
   "author": "",

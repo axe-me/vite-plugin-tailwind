@@ -9,7 +9,7 @@ export function VitePluginTailwind(options: VitePluginTailwindOptions = {}): Plu
     jit: true,
     autoprefixer: false,
     nesting: false,
-    cssPath: path.resolve("./tailwind.css"),
+    cssPath: path.resolve("../tailwind.css"),
     virtualFileId: "@tailwindcss",
     viewer: {
       path: '/_tailwind/',
