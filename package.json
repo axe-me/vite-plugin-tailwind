@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-tailwind",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "vite tailwind plugin with jit compiler enabled",
   "main": "dist/index.js",
   "workspaces": [
