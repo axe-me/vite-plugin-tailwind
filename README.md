@@ -8,6 +8,8 @@
 - Config viewer at `/_tailwind/` (dont miss the trailing slash at the end)
 
 ## Usage
+
+### Fastest case
 just add this plugin into your `vite.config.ts`
 
 ```ts
@@ -20,6 +22,31 @@ export default defineConfig({
   ],
 });
 
+```
+
+### Extended case
+
+Assumptions:
+
+- projects `./src/tailwind.css` should be used
+- projects `./tailwind.config.js` should be used along with tailwind plugins like `@tailwindcss/forms`, `@tailwindcss/typography`, `@tailwindcss/aspect-ratio`
+
+```js
+import { defineConfig } from 'vite'
+import vuePlugin from '@vitejs/plugin-vue'
+import path from 'path'
+import tailwindVitePlugin from "vite-plugin-tailwind";
+import tailwindConfig from './tailwind.config'
+
+export default defineConfig({
+  plugins: [vuePlugin(), tailwindVitePlugin({
+    jit: true,
+    autoprefixer: true,
+    nesting: true,
+    cssPath: path.resolve(__dirname, 'src', 'tailwind.css'),
+    tailwind: tailwindConfig,
+  })],
+})
 ```
 
 see the examples folder for example XD
