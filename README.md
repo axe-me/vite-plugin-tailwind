@@ -1,3 +1,4 @@
+> This project no longer maintained. Since tailwind 2.1, the JIT mode is builtin in their package. Please follow tailwind official document to setup it with Vite.
 # Vite Tailwind Plugin
 
 > This plugin heavily inspired by the [vite-plugin-windicss](https://github.com/windicss/vite-plugin-windicss) and the [Nuxt tailwind module](https://tailwindcss.nuxtjs.org/)
